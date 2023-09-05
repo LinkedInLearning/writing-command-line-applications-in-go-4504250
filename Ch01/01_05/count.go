@@ -25,7 +25,7 @@ func runCount(args []string) {
 	fs := flag.NewFlagSet("count", flag.ExitOnError)
 	fs.Usage = func() {
 		name := path.Base(os.Args[0])
-		fmt.Fprintf(os.Stderr, validateUsage, name)
+		fmt.Fprintf(os.Stderr, countUsage, name)
 		fs.PrintDefaults()
 	}
 	fs.Parse(args[1:])

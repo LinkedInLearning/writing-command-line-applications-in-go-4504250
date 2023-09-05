@@ -88,7 +88,7 @@ func parseEnv() error {
 	case "":
 		// NOP
 	default:
-		return fmt.Errorf("bad value for %s - %q\n", verboseKey, v)
+		return fmt.Errorf("bad value for %s - %q", verboseKey, v)
 	}
 
 	return nil
