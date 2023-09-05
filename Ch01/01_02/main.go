@@ -16,7 +16,7 @@ var config struct {
 }
 
 var usage = `Usage: %s [options] [FILE]
-Parse server logs in FILE (standard input if not given).
+Validate server logs in FILE (standard input if not given).
 
 Options:
 `

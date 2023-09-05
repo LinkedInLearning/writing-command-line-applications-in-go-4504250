@@ -16,7 +16,7 @@ var parseConfig struct {
 }
 
 var parseUsage = `Usage: %s parse [options] [FILE]
-Parse server logs in FILE (standard input if not given).
+Validate server logs in FILE (standard input if not given).
 
 Options:
 `
