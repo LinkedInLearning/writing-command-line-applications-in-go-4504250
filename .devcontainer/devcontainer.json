@@ -6,7 +6,7 @@
 			// Update the VARIANT arg to pick a version of Go: 1, 1.18, 1.17
 			// Append -bullseye or -buster to pin to an OS version.
 			// Use -bullseye variants on local arm64/Apple Silicon.
-			"VARIANT": "1.18",
+			"VARIANT": "1.20",
 			// Options
 			"NODE_VERSION": "lts/*"
 		}
@@ -25,6 +25,10 @@
     		"GitHub.github-vscode-theme",
 		"golang.Go"
 	],
+
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2.1.0": {}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
