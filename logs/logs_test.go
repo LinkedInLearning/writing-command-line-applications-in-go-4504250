@@ -93,7 +93,7 @@ func TestScanner(t *testing.T) {
 }
 
 func TestScannerFile(t *testing.T) {
-	file, err := os.Open("../testdata/httpd.log")
+	file, err := os.Open("testdata/httpd.log")
 	require.NoError(t, err, "open")
 	defer file.Close()
 
