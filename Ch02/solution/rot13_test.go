@@ -44,7 +44,7 @@ func TestRot13Stdin(t *testing.T) {
 
 	for _, tc := range rot13Cases {
 		t.Run(tc.text, func(t *testing.T) {
-			cmd := exec.Command(exe, tc.text)
+			cmd := exec.Command(exe)
 			cmd.Stdin = strings.NewReader(tc.text)
 			out, err := cmd.CombinedOutput()
 			require.NoError(t, err, "run")
