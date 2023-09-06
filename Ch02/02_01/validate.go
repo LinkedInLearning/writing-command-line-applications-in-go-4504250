@@ -10,18 +10,18 @@ import (
 	"github.com/353solutions/infra/logs"
 )
 
-var parseConfig struct {
+var validateCfg struct {
 	count   int
 	verbose bool
 }
 
-var parseUsage = `Usage: %s parse [options] [FILE]
+var validateUsage = `Usage: %s validate [options] [FILE]
 Validate server logs in FILE (standard input if not given).
 
 Options:
 `
 
-func runParse(args []string) {
+func runValidate(args []string) {
 	if err := parseEnv(); err != nil {
 		fmt.Fprintf(os.Stderr, "error: %s\n", err)
 		os.Exit(1)
@@ -30,11 +30,11 @@ func runParse(args []string) {
 	fs := flag.NewFlagSet("parse", flag.ExitOnError)
 	fs.Usage = func() {
 		name := path.Base(os.Args[0])
-		fmt.Fprintf(os.Stderr, parseUsage, name)
+		fmt.Fprintf(os.Stderr, validateUsage, name)
 		fs.PrintDefaults()
 	}
-	fs.Var(&Count{&parseConfig.count}, "count", "number of records to parse")
-	fs.BoolVar(&parseConfig.verbose, "verbose", parseConfig.verbose, "emit more information (also LOGS_VERBOSE)")
+	fs.Var(&Count{&validateCfg.count}, "count", "number of records to parse")
+	fs.BoolVar(&validateCfg.verbose, "verbose", validateCfg.verbose, "emit more information (also LOGS_VERBOSE)")
 	fs.Parse(args[1:])
 
 	var r io.Reader
@@ -61,7 +61,7 @@ func runParse(args []string) {
 	n := 0
 	for s.Next() {
 		n++
-		if parseConfig.count > 0 && parseConfig.count == n {
+		if validateCfg.count > 0 && validateCfg.count == n {
 			break
 		}
 	}
@@ -71,8 +71,8 @@ func runParse(args []string) {
 		os.Exit(1)
 	}
 
-	if parseConfig.verbose {
-		fmt.Printf("%s: successfully processed %d records\n", fileName, n)
+	if validateCfg.verbose {
+		fmt.Printf("%s: successfully validated %d records\n", fileName, n)
 	}
 }
 
@@ -82,13 +82,13 @@ func parseEnv() error {
 	switch v {
 	// See https://pkg.go.dev/flag#hdr-Command_line_flag_syntax
 	case "1", "t", "T", "true", "TRUE", "True":
-		parseConfig.verbose = true
+		validateCfg.verbose = true
 	case "0", "f", "F", "false", "FALSE", "False":
-		parseConfig.verbose = false
+		validateCfg.verbose = false
 	case "":
 		// NOP
 	default:
-		return fmt.Errorf("bad value for %s - %q\n", verboseKey, v)
+		return fmt.Errorf("bad value for %s - %q", verboseKey, v)
 	}
 
 	return nil

@@ -9,20 +9,20 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestParseExe(t *testing.T) {
+func TestValidateExe(t *testing.T) {
 	exe := buildExe(t)
-	output, err := exec.Command(exe, "parse", "testdata/httpd.log").CombinedOutput()
+	output, err := exec.Command(exe, "validate", "testdata/httpd.log").CombinedOutput()
 	require.NoError(t, err, "run:\n%s", string(output))
 }
 
-func TestParseExeStdin(t *testing.T) {
+func TestValidateExeStdin(t *testing.T) {
 	file, err := os.Open("testdata/httpd.log")
 	require.NoError(t, err, "open")
 	defer file.Close()
 
 	exe := buildExe(t)
 
-	cmd := exec.Command(exe, "parse")
+	cmd := exec.Command(exe, "validate")
 	cmd.Stdin = file
 
 	output, err := cmd.CombinedOutput()

@@ -55,6 +55,9 @@ func runCount(args []string) {
 	n := 0
 	for s.Next() {
 		n++
+		if validateCfg.count > 0 && validateCfg.count == n {
+			break
+		}
 	}
 
 	if err := s.Err(); err != nil {

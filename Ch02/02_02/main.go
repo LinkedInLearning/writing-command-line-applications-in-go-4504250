@@ -18,7 +18,7 @@ Run "%s <command> -h" for sub command help.
 `
 
 func main() {
-	commands["parse"] = runParse
+	commands["validate"] = runValidate
 	commands["count"] = runCount
 
 	if len(os.Args) < 2 {
